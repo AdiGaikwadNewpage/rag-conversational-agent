@@ -1,6 +1,5 @@
 from embeddings.openai_embeddings import OpenAIEmbeddings
 from langchain_community.embeddings.ollama import OllamaEmbeddings
-from langchain_community.embeddings.bedrock import BedrockEmbeddings
 
 class Embeddings:
     def __init__(self, model_name: str, api_key: str = None):
@@ -14,7 +13,5 @@ class Embeddings:
             if not self.api_key:
                 raise ValueError("OpenAI API key must be provided for OpenAI embeddings")
             return OpenAIEmbeddings(api_key=self.api_key)
-        elif self.model_name == "bedrock":
-            return BedrockEmbeddings(credentials_profile_name="default", region_name="us-east-1")
         else:
             raise ValueError(f"Unsupported embedding model: {self.model_name}")

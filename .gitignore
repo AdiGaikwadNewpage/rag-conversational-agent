@@ -3,3 +3,5 @@
 backup
 chroma-ollama
 chroma-openai
+.env
+venv/

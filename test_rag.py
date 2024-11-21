@@ -9,11 +9,10 @@ load_dotenv()
 VECTOR_DB_OPENAI_PATH = os.getenv('VECTOR_DB_OPENAI_PATH')
 VECTOR_DB_OLLAMA_PATH = os.getenv('VECTOR_DB_OLLAMA_PATH')
 LLM_MODEL_NAME = os.getenv('LLM_MODEL_NAME')  # 'gpt-3.5-turbo', 'GPT-4o' or local LLM like 'llama3:8b'
-LLM_MODEL_TYPE = os.getenv('LLM_MODEL_TYPE')  # 'ollama', 'gpt', 'claude'
+LLM_MODEL_TYPE = os.getenv('LLM_MODEL_TYPE')  # 'ollama', 'gpt'
 EMBEDDING_MODEL_NAME = os.getenv('EMBEDDING_MODEL_NAME')  # 'ollama' or 'openai'
 NUM_RELEVANT_DOCS = int(os.getenv('NUM_RELEVANT_DOCS'))
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-CLAUDE_API_KEY = os.getenv('CLAUDE_API_KEY')
 
 EVAL_PROMPT = """
 Expected Response: {expected_response}
@@ -34,7 +33,7 @@ def get_api_key(embedding_model_name):
     if embedding_model_name == "openai":
         return OPENAI_API_KEY
     else:
-        return CLAUDE_API_KEY
+        raise ValueError(f"Unsupported embedding model: {EMBEDDING_MODEL_NAME}")
 
 # Initialize the retriever and the LLM once
 vector_db_path = get_vector_db_path(EMBEDDING_MODEL_NAME)
